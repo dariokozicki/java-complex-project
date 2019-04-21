@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Complejo{
-    Punto binomial = new Punto();
+    Punto complejo = new Punto();
 
-    public Complejo(String expression) {
+    public Punto complejo(String expression) {
         Pattern binomial = Pattern.compile("\\(" +
                 "(\\d+\\.?\\d+)" +
                 "," +
@@ -20,21 +20,23 @@ public class Complejo{
         Matcher matchbin = binomial.matcher(expression);
         Matcher matchpol = polar.matcher(expression);
         if (matchbin.find()) {
-            setBinomial(matchbin);
+            return setBinomial(matchbin);
         } else {
             if (matchpol.find()) {
-                setPolar(matchpol);
+                return setPolar(matchpol);
             }
-        }
+        }return complejo;
     }
-    public void setBinomial(Matcher matchbin){
-        binomial.re( Double.parseDouble(matchbin.group(0)) );
-        binomial.im( Double.parseDouble(matchbin.group(1)) );
+    public Punto setBinomial(Matcher matchbin){
+        complejo.re( Double.parseDouble(matchbin.group(0)) );
+        complejo.im( Double.parseDouble(matchbin.group(1)) );
+        return complejo;
     }
-    public void setPolar(Matcher matchpol){
+    public Punto setPolar(Matcher matchpol){
         double rads = corregirGiro( Double.parseDouble(matchpol.group(1)) );
-        binomial.re( Double.parseDouble(matchpol.group(0))*Math.cos(rads) );
-        binomial.im( Double.parseDouble(matchpol.group(0))*Math.sin(rads) );
+        complejo.re( Double.parseDouble(matchpol.group(0))*Math.cos(rads) );
+        complejo.im( Double.parseDouble(matchpol.group(0))*Math.sin(rads) );
+        return complejo;
 
     }
     public double corregirGiro(double radianes){
