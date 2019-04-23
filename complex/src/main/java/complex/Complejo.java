@@ -4,37 +4,51 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Complejo{
-    Punto binomial = new Punto();
+    Punto parOrdenado = new Punto();
 
     public Complejo(String expression) {
-        Pattern binomial = Pattern.compile("\\(" +
-                "(\\d+\\.?\\d+)" +
+        Pattern parOrdenado = Pattern.compile("\\(" +
+                "(\\d+\\.?\\d*)" +
                 "," +
-                "(\\d+\\.?\\d+)" +
+                "(\\d+\\.?\\d*)" +
                 "\\)");
         Pattern polar = Pattern.compile("\\[" +
-                "(\\d+\\.?\\d+)" +
+                "(\\d+\\.?\\d*)" +
                 "," +
-                "(\\d+\\.?\\d+)" +
+                "(\\d+\\.?\\d*)" +
                 "\\]");
-        Matcher matchbin = binomial.matcher(expression);
+        Pattern binomial = Pattern.compile("" +
+                "(\\d+\\.?\\d*)" +
+                "\\s?" +
+                "\\+" +
+                "(\\d+\\.?\\d*)j"
+                );
+        Matcher matchord = parOrdenado.matcher(expression);
         Matcher matchpol = polar.matcher(expression);
-        if (matchbin.find()) {
-            setBinomial(matchbin);
+        Matcher matchbin = binomial.matcher(expression);
+        if (matchord.find()) {
+            setOrdenadoOBinomial(matchord);
         } else {
             if (matchpol.find()) {
                 setPolar(matchpol);
+            }else{
+                if (matchbin.find()){
+                    setOrdenadoOBinomial(matchbin);
+                }else{
+                    //error
+                }
             }
+
         }
     }
-    public void setBinomial(Matcher matchbin){
-        binomial.re( Double.parseDouble(matchbin.group(0)) );
-        binomial.im( Double.parseDouble(matchbin.group(1)) );
+    public void setOrdenadoOBinomial(Matcher matchord){
+        parOrdenado.re( Double.parseDouble(matchord.group(0)) );
+        parOrdenado.im( Double.parseDouble(matchord.group(1)) );
     }
     public void setPolar(Matcher matchpol){
         double rads = corregirGiro( Double.parseDouble(matchpol.group(1)) );
-        binomial.re( Double.parseDouble(matchpol.group(0))*Math.cos(rads) );
-        binomial.im( Double.parseDouble(matchpol.group(0))*Math.sin(rads) );
+        parOrdenado.re( Double.parseDouble(matchpol.group(0))*Math.cos(rads) );
+        parOrdenado.im( Double.parseDouble(matchpol.group(0))*Math.sin(rads) );
 
     }
     public double corregirGiro(double radianes){
