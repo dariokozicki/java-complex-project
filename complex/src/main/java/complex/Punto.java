@@ -17,16 +17,16 @@ public class Punto {
     public Punto complemento(){
         return new Punto(valorA,-valorB);
     }
-    public double re(){
+    public double getRe(){
         return valorA;
     }
-    public void re(double valorA){
+    public void setRe(double valorA){
         this.valorA = valorA;
     }
-    public double im(){
+    public double getIm(){
         return valorB;
     }
-    public void im(double valorB){
+    public void setIm(double valorB){
         this.valorB = valorB;
     }
 

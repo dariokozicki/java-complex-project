@@ -42,13 +42,13 @@ public class Complejo{
         }
     }
     public void setOrdenadoOBinomial(Matcher matchord){
-        parOrdenado.re( Double.parseDouble(matchord.group(0)) );
-        parOrdenado.im( Double.parseDouble(matchord.group(1)) );
+        parOrdenado.setRe( Double.parseDouble(matchord.group(0)) );
+        parOrdenado.setIm( Double.parseDouble(matchord.group(1)) );
     }
     public void setPolar(Matcher matchpol){
         double rads = corregirGiro( Double.parseDouble(matchpol.group(1)) );
-        parOrdenado.re( Double.parseDouble(matchpol.group(0))*Math.cos(rads) );
-        parOrdenado.im( Double.parseDouble(matchpol.group(0))*Math.sin(rads) );
+        parOrdenado.setRe( Double.parseDouble(matchpol.group(0))*Math.cos(rads) );
+        parOrdenado.setIm( Double.parseDouble(matchpol.group(0))*Math.sin(rads) );
 
     }
     public double corregirGiro(double radianes){
