@@ -35,23 +35,26 @@ public class Complejo{
                 if (matchbin.find()){
                     setOrdenadoOBinomial(matchbin);
                 }else{
-                    //error
+                    throw new NoPerteneceANingunFormatoException("WARNING: el formato del complejo ingresado es invalido");
                 }
             }
 
         }
     }
     public void setOrdenadoOBinomial(Matcher matchord){
-        parOrdenado.setRe( Double.parseDouble(matchord.group(0)) );
-        parOrdenado.setIm( Double.parseDouble(matchord.group(1)) );
+        parOrdenado.setRe( Double.parseDouble(matchord.group(1)) );
+        parOrdenado.setIm( Double.parseDouble(matchord.group(2)) );
     }
     public void setPolar(Matcher matchpol){
-        double rads = corregirGiro( Double.parseDouble(matchpol.group(1)) );
-        parOrdenado.setRe( Double.parseDouble(matchpol.group(0))*Math.cos(rads) );
-        parOrdenado.setIm( Double.parseDouble(matchpol.group(0))*Math.sin(rads) );
+        double rads = corregirGiro( Double.parseDouble(matchpol.group(2)) );
+        parOrdenado.setRe( Double.parseDouble(matchpol.group(1))*Math.cos(rads) );
+        parOrdenado.setIm( Double.parseDouble(matchpol.group(1))*Math.sin(rads) );
 
     }
     public double corregirGiro(double radianes){
         return radianes % (2*Math.PI);
+    }
+    public Punto getPunto() {
+    	return parOrdenado;
     }
 }
