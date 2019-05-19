@@ -10,6 +10,12 @@ public class PuntoTest {
 		assertTrue(punto.getIm() == 2);
 		assertTrue(punto.norma() == 2);
 		assertTrue(punto.getRe() == 0);
+		assertTrue(punto.argumento()==Math.PI/2);
+	}
+	@Test
+	public void instanciacionDePunto2() {
+		Punto punto=new Punto(1,2);
+		assertTrue(punto.argumento()==Math.atan(2/1));
 	}
 	@Test
 	public void instanciacionDePuntoSinParametros() {

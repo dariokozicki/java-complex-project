@@ -14,6 +14,15 @@ public class Punto {
     public double norma(){
         return Math.sqrt(Math.pow(valorA,2)+Math.pow(valorB,2));
     }
+    public double argumento() {
+    	if (this.getRe()!=0) {
+    	return Math.atan(this.getIm()/this.getRe());
+    	}
+    	if (this.getIm()<0){
+    		return Math.PI*(3/2);
+    	}
+    	return Math.PI /2;
+    }
     public Punto complemento(){
         return new Punto(valorA,-valorB);
     }
