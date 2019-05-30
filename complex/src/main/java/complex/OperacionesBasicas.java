@@ -6,7 +6,7 @@ public class OperacionesBasicas {
 		double resultadoImaginario = complejo1.getIm()- complejo2.getIm();
 		return new Punto(resultadoReal, resultadoImaginario);
 	}
-	public Punto suma(Punto complejo1,Punto complejo2) {
+	public static Punto suma(Punto complejo1,Punto complejo2) {
 		double resultadoReal = complejo1.getRe()+ complejo2.getRe();
 		double resultadoImaginario = complejo1.getIm()+ complejo2.getIm();
 		return new Punto(resultadoReal, resultadoImaginario);
