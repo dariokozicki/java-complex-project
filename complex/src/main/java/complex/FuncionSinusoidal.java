@@ -8,7 +8,16 @@ public class FuncionSinusoidal {
 	private double amplitud;
 	private double faseInicial;
 	private String operacion;
+	Matcher funcionMacheada;
 	public FuncionSinusoidal(String funcion) {
+		this.validarFormato(funcion);
+		this.setAmplitud(Double.parseDouble(funcionMacheada.group(1)));
+		this.setOperacion(funcionMacheada.group(2));
+		this.setFrecuencia(Double.parseDouble(funcionMacheada.group(3)));
+		this.setFaseInicial(Double.parseDouble(funcionMacheada.group(4)));
+		
+	}
+	public void validarFormato(String funcion) {
 		Pattern formato = Pattern.compile("(\\d+\\.?\\d*)" +
                 "(cos)"+
                 "\\("+
@@ -17,17 +26,21 @@ public class FuncionSinusoidal {
                 "\\+" + 
                 "(\\d+\\.?\\d*)"+
                 "\\)");
-		Matcher funcionMacheada = formato.matcher(funcion);
-		validarFormato(funcionMacheada);
-		this.setAmplitud(Double.parseDouble(funcionMacheada.group(1)));
-		this.setOperacion(funcionMacheada.group(2));
-		this.setFrecuencia(Double.parseDouble(funcionMacheada.group(3)));
-		this.setFaseInicial(Double.parseDouble(funcionMacheada.group(4)));
-		
-	}
-	public void validarFormato(Matcher funcion) {
-		if(!funcion.find()) 
-			throw new FuncionSinusoidalFormatoException("WARNING: La funcion sinusoidal no posee el formato indicado");
+		funcionMacheada = formato.matcher(funcion);
+		if(!funcionMacheada.find()) {
+			formato = Pattern.compile("(\\d+\\.?\\d*)" +
+	                "(sen)"+
+	                "\\("+
+	                "(\\d+\\.?\\d*)"+
+	                "t"+ 
+	                "\\+" + 
+	                "(\\d+\\.?\\d*)"+
+	                "\\)");
+			funcionMacheada = formato.matcher(funcion);
+			if(!funcionMacheada.find()) {
+				throw new FuncionSinusoidalFormatoException("WARNING: La funcion sinusoidal no posee el formato indicado");
+			}
+		}		
 	}
 	public double getFrecuencia() {
 		return frecuencia;
