@@ -16,12 +16,19 @@ public class Punto {
     }
     public double argumento() {
     	if (this.getRe()!=0) {
-    	return Math.atan(this.getIm()/this.getRe());
+    	Double argumento= Math.atan((double) this.getIm()/this.getRe());
+    		if(argumento<=0 && this.getIm()<0)//CuartoCuadrante 
+    			return 2*Math.PI +argumento;
+    		if(argumento<=0 && this.getRe()<0)//SegundoCuadrante
+    			return Math.PI + argumento;
+    		if(this.getIm()<0 && this.getRe()<0)//TercerCuadrante
+    			return Math.PI + argumento;
+    		return argumento;//PrimerCuadrante
     	}
     	if (this.getIm()<0){
-    		return Math.PI*(3/2);
+    		return Math.PI*((double)3/2);
     	}
-    	return Math.PI /2;
+    	return (double) Math.PI /2;
     }
     public Punto complemento(){
         return new Punto(valorA,-valorB);
