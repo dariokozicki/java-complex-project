@@ -13,10 +13,8 @@ public class SumaFasoresTest {
 		FuncionSinusoidal funcion =suma.SumarFasores();
 		assertEquals(funcion.getOperacion(),"cos");
 		assertEquals(funcion.getOperacion(),"cos");
-		//System.out.println(funcion.getAmplitud());
-		//assertTrue(funcion.getAmplitud()==5);
+		assertTrue(funcion.getAmplitud()==5);
 		assertTrue(funcion.getFrecuencia()==2);
-		//System.out.println(funcion.getFaseInicial());
-		//assertTrue(funcion.getFaseInicial()==0);
+		assertTrue(funcion.getFaseInicial()==0);
 	}
 }

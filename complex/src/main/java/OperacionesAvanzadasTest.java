@@ -20,10 +20,11 @@ public class OperacionesAvanzadasTest {
 		Punto punto = new Punto(0,9);
 		ArrayList<Punto> resultado = OperacionesAvanzadas.raizNescima(punto, 2);
 		assertTrue(resultado.stream().allMatch(puntos-> puntos.norma()==3));
-		assertTrue(this.redondeo(resultado.get(0).argumento()).equals(this.redondeo((Double)Math.PI/4)));
+		assertTrue(this.redondeo(resultado.get(0).argumento())==this.redondeo((Double)Math.PI/4));
 	}
-	public Double redondeo(Double nro) {
-		return Double.parseDouble(String.format("%.10f", nro).replace(",", "."));
+	public double redondeo(Double nro) {
+		Double objetoDouble = Double.parseDouble(String.format("%.10f", nro).replace(",", "."));
+		return objetoDouble.doubleValue();
 	}
 	@Test
 	public void raicesPrimitivas() {

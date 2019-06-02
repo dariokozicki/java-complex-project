@@ -12,17 +12,17 @@ public class SumaFasores {
 		this.validarQuePoseanMismaFrecuencia(funcion1,funcion2);
 		this.mismaOperacion(funcion1,funcion2);
 		Punto resultado = OperacionesBasicas.suma(this.aFasor(funcion1), this.aFasor(funcion2));
-		return new FuncionSinusoidal(String.valueOf(resultado.norma())+
+		return new FuncionSinusoidal(Double.toString(resultado.norma())+
 				funcion1.getOperacion()+"("+funcion1.getFrecuencia()+"t"+ "+"+
-				String.valueOf(resultado.argumento())+")");
+				Double.toString(resultado.argumento())+")");
 	}
 	public void mismaOperacion(FuncionSinusoidal funcion1,FuncionSinusoidal funcion2) {
-		if((funcion1.getOperacion() != funcion2.getOperacion())) {
+		if(!funcion1.getOperacion().equals(funcion2.getOperacion())) {
 			if(funcion1.getOperacion() == "cos") {
-				funcion1.setFaseInicial(funcion2.getFaseInicial()+ Math.PI/2);
+				funcion1.setFaseInicial(funcion2.getFaseInicial()+ (double)Math.PI/2);
 				funcion1.setOperacion("sen");
 			}else {
-				funcion2.setFaseInicial(funcion2.getFaseInicial()+ Math.PI/2);
+				funcion2.setFaseInicial(funcion2.getFaseInicial()+ (double)Math.PI/2);
 				funcion2.setOperacion("sen");
 			}
 		}
@@ -30,6 +30,11 @@ public class SumaFasores {
 	public Punto aFasor(FuncionSinusoidal funcion) {
 		double real = funcion.getAmplitud()*Math.cos(funcion.getFaseInicial());
 		double imaginario = funcion.getAmplitud()*Math.cos(funcion.getFaseInicial());
+		//Revisar el error de aproximacion a cero
+		if (funcion.getFaseInicial() ==0 || funcion.getFaseInicial() == Math.PI) 
+			imaginario=0.0;
+		if (funcion.getAmplitud() ==(double) Math.PI/2 || funcion.getAmplitud() == Math.PI*((double)(3.0/2))) 
+			real=0.0;
 		return new Punto(real,imaginario);
 	}
 	
