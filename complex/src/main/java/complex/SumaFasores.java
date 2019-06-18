@@ -8,7 +8,7 @@ public class SumaFasores {
 		this.funcion1 = new FuncionSinusoidal(funcion1);
 		this.funcion2 = new FuncionSinusoidal(funcion2);
 	}
-	public FuncionSinusoidal SumarFasores() {
+	public FuncionSinusoidal sumarFasores() {
 		this.validarQuePoseanMismaFrecuencia(funcion1,funcion2);
 		this.mismaOperacion(funcion1,funcion2);
 		Punto resultado = OperacionesBasicas.suma(this.aFasor(funcion1), this.aFasor(funcion2));

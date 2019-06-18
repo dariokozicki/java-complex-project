@@ -1,36 +1,34 @@
 package interfaz;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import complex.Complejo;
+import complex.FuncionSinusoidal;
 import complex.OperacionesAvanzadas;
 import complex.OperacionesBasicas;
 import complex.Punto;
+import complex.SumaFasores;
 
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JList;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JList;
 
 public class VentanaOperaciones extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextField textNumero1;
 	private JTextField textNumero2;
-	private JTextField textResultado;
 
 	/**
 	 * Launch the application.
@@ -56,87 +54,135 @@ public class VentanaOperaciones extends JFrame {
 		VentanaOperaciones operacion = this;
 		setTitle("Seleccionar Operacion");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 548, 343);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Seleccione la operacion deseada", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 255)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		DefaultListModel listDefault =new DefaultListModel();
+		JList listResultado = new JList();
+		listResultado.setBounds(32, 139, 292, 114);
+		contentPane.add(listResultado);
+		
 		JButton btnMultiplicacion = new JButton("Multiplicacion");
 		btnMultiplicacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				listDefault.clear();
 				Complejo complejo1 = new Complejo(textNumero1.getText());
 				Complejo complejo2 = new Complejo(textNumero2.getText());
 				Punto resultado =OperacionesBasicas.multiplicacion(complejo1.getPunto(), complejo2.getPunto());
-				textResultado.setText(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j");
+				listDefault.addElement(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j");
+				listResultado.setModel(listDefault);
 			}
 		});
-		btnMultiplicacion.setBounds(32, 148, 120, 23);
+		btnMultiplicacion.setBounds(351, 95, 120, 23);
 		contentPane.add(btnMultiplicacion);
 		
 		JButton btnCociente = new JButton("Cociente");
 		btnCociente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				listDefault.clear();
 				Complejo complejo1 = new Complejo(textNumero1.getText());
 				Complejo complejo2 = new Complejo(textNumero2.getText());
 				Punto resultado =OperacionesBasicas.cociente(complejo1.getPunto(), complejo2.getPunto());
-				textResultado.setText(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j");
+				listDefault.addElement(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j");
+				listResultado.setModel(listDefault);
 			}
 		});
-		btnCociente.setBounds(32, 182, 120, 23);
+		btnCociente.setBounds(351, 120, 120, 23);
 		contentPane.add(btnCociente);
 		
 		JButton btnSum = new JButton("Suma");
 		btnSum.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				listDefault.clear();
 				Complejo complejo1 = new Complejo(textNumero1.getText());
 				Complejo complejo2 = new Complejo(textNumero2.getText());
 				Punto resultado =OperacionesBasicas.suma(complejo1.getPunto(), complejo2.getPunto());
-				textResultado.setText(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j");
+				listDefault.addElement(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j");
+				listResultado.setModel(listDefault);
 			}
 		});
-		btnSum.setBounds(162, 148, 120, 23);
+		btnSum.setBounds(351, 72, 120, 23);
 		contentPane.add(btnSum);
 		
 		JButton btnNewButton = new JButton("Resta");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				listDefault.clear();
 				Complejo complejo1 = new Complejo(textNumero1.getText());
 				Complejo complejo2 = new Complejo(textNumero2.getText());
 				Punto resultado =OperacionesBasicas.resta(complejo1.getPunto(), complejo2.getPunto());
-				textResultado.setText(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j");
+				listDefault.addElement(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j");
+				listResultado.setModel(listDefault);
 			}
 		});
-		btnNewButton.setBounds(292, 148, 120, 23);
+		btnNewButton.setBounds(351, 48, 120, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnPotencia = new JButton("Potencia");
-		
-		btnPotencia.setBounds(292, 182, 120, 23);
+		btnPotencia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listDefault.clear();
+				Complejo complejo1 = new Complejo(textNumero1.getText());
+				int exponencial = Integer.valueOf(textNumero2.getText());
+				Punto resultado =OperacionesAvanzadas.potencia(complejo1.getPunto(), exponencial);
+				listDefault.addElement(Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j ");
+				listResultado.setModel(listDefault);
+				
+			}
+		});
+		btnPotencia.setBounds(351, 196, 120, 23);
 		contentPane.add(btnPotencia);
 		
 		JButton btnRadicacion = new JButton("Radicacion");
 		btnRadicacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				listDefault.clear();
 				Complejo complejo1 = new Complejo(textNumero1.getText());
 				int exponencial = Integer.valueOf(textNumero2.getText());
 				ArrayList<Punto> resultados =OperacionesAvanzadas.raizNescima(complejo1.getPunto(), exponencial);
-				resultados.forEach(resultado->textResultado.setText(
-						Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j")
+				resultados.forEach(resultado->listDefault.addElement(
+						Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j ")
 				);
+				listResultado.setModel(listDefault);
+				
 			}
 		});
-		btnRadicacion.setBounds(162, 182, 120, 23);
+		btnRadicacion.setBounds(351, 150, 120, 23);
 		contentPane.add(btnRadicacion);
+		
+		JButton btnRadicacionPrimitivas = new JButton("RaicesPrimitivas");
+		btnRadicacionPrimitivas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listDefault.clear();
+				Complejo complejo1 = new Complejo(textNumero1.getText());
+				int exponencial = Integer.valueOf(textNumero2.getText());
+				ArrayList<Punto> resultados =OperacionesAvanzadas.raicesPrimitivas(complejo1.getPunto(), exponencial);
+				resultados.forEach(resultado->listDefault.addElement(
+						Double.toString(resultado.getRe())+" + "+Double.toString(resultado.getIm())+ " j ")
+				);
+				listResultado.setModel(listDefault);
+				
+			}
+		});
+		btnRadicacionPrimitivas.setBounds(351, 173, 120, 23);
+		contentPane.add(btnRadicacionPrimitivas);
 		
 		JButton btnSumaDeFasores = new JButton("Suma de fasores");
 		btnSumaDeFasores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	this.setVisible(false); 
-				IngresarBasicas.main();
+				listDefault.clear();
+				SumaFasores suma = new SumaFasores(textNumero1.getText(),textNumero2.getText());
+				FuncionSinusoidal resultado = suma.sumarFasores();
+				listDefault.addElement(
+						Double.toString(resultado.getAmplitud())+resultado.getOperacion()+"("+
+						Double.toString(resultado.getFrecuencia())+ "t + "+ Double.toString(resultado.getFaseInicial())+")");
+				listResultado.setModel(listDefault);
 			}
 		});
-		btnSumaDeFasores.setBounds(144, 216, 146, 23);
+		btnSumaDeFasores.setBounds(351, 230, 120, 23);
 		contentPane.add(btnSumaDeFasores);
 		
 		JLabel label = new JLabel("Primer Número");
@@ -161,13 +207,11 @@ public class VentanaOperaciones extends JFrame {
 		
 		JLabel lblResultado = new JLabel("Resultado");
 		lblResultado.setEnabled(false);
-		lblResultado.setBounds(87, 115, 54, 14);
+		lblResultado.setBounds(32, 110, 54, 14);
 		contentPane.add(lblResultado);
 		
-		textResultado = new JTextField();
-		textResultado.setEnabled(false);
-		textResultado.setBounds(162, 117, 120, 20);
-		contentPane.add(textResultado);
-		textResultado.setColumns(10);
+		
+		
+		
 	}
 }

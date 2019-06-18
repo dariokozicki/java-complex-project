@@ -29,7 +29,7 @@ public class OperacionesAvanzadas {
 			real=0.0;
 		return new Punto(real,img);
 	}
-	public ArrayList<Punto> raicesPrimitivas(Punto radicando,int radical) {
+	public static ArrayList<Punto> raicesPrimitivas(Punto radicando,int radical) {
 		ArrayList<Punto> resultado = raizNescima(radicando,radical);
 		ArrayList<Punto> primitiva = new ArrayList<Punto>();
 		for(int i=0; i<radical; i++){
