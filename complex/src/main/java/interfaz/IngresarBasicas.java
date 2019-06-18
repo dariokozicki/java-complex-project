@@ -9,6 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IngresarBasicas extends JFrame {
 
@@ -37,7 +40,7 @@ public class IngresarBasicas extends JFrame {
 	 */
 	public IngresarBasicas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 410, 210);
+		setBounds(100, 100, 410, 265);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,5 +70,28 @@ public class IngresarBasicas extends JFrame {
 		textField_1.setBounds(210, 103, 86, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
+		
+		JButton btnCalcular = new JButton("Calcular");
+		btnCalcular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnCalcular.setBounds(45, 146, 89, 23);
+		contentPane.add(btnCalcular);
+		
+		JButton btnVolverAtras = new JButton("VolverAtrás");
+		btnVolverAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnVolverAtras.setBounds(45, 180, 89, 23);
+		contentPane.add(btnVolverAtras);
+		
+		JLabel lblResultado = new JLabel("");
+		lblResultado.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblResultado.setBounds(160, 150, 136, 19);
+		contentPane.add(lblResultado);
+		
+		
 	}
 }
